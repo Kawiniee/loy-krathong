@@ -180,7 +180,7 @@ export default function Workshop({ board, room, action, readOnly = false, roundI
       <div className="material-tabs" aria-label="หมวดวัสดุ">{categories.map((label, i) =>
         <button key={label} className={i === category ? 'active' : ''} aria-pressed={i === category} onClick={() => setCategory(i)}>{label}</button>,
       )}</div>
-      <div className="material-grid">
+      <div className="material-grid" key={category}>
         {materials.filter(material => material.category === category).map(material =>
           <button key={material.id} type="button" aria-label={material.name} disabled={disabled} draggable={!disabled}
             onDragStart={event => { event.dataTransfer.setData('text/plain', material.id); event.dataTransfer.effectAllowed = 'copy' }}

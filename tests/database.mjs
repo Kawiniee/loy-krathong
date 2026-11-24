@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises'
+import { readFile, readdir } from 'node:fs/promises'
 import { URL } from 'node:url'
 import { PGlite } from '@electric-sql/pglite'
 
@@ -14,7 +14,10 @@ export async function testDatabase() {
     $$;
     create publication supabase_realtime;
   `)
-  await db.exec(await readFile(new URL('../supabase/migrations/202611240001_festival.sql', import.meta.url), 'utf8'))
+  const migrations = new URL('../supabase/migrations/', import.meta.url)
+  for (const file of (await readdir(migrations)).filter(name => name.endsWith('.sql')).sort()) {
+    await db.exec(await readFile(new URL(file, migrations), 'utf8'))
+  }
 
   async function asUser(uid, query, params) {
     return db.transaction(async tx => {

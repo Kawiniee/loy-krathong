@@ -24,7 +24,9 @@ function BoatArt({ boat, elapsed, animated, names }: { boat: Boat; elapsed: numb
   const passage = Math.min(elapsed / 25, 1)
   const x = 140 + boat.position * 1000 + (animated ? Math.sin(elapsed * .19 + boat.seat) * 21 + passage * (boat.seat === 1 ? -74 : 66) : 0)
   const y = (boat.seat === 1 ? 450 : 483) + (animated ? Math.sin(elapsed * 1.1 + boat.seat) * 3 - passage * 70 : 0)
-  const candles = ordered.filter(piece => piece.material === 'candle')
+  const candles = ordered.filter(piece =>
+    piece.material === 'candle' || piece.material === 'lotus-candle' || piece.material === 'star-candle',
+  )
   const centerX = bound.x + bound.w / 2
   const centerY = bound.y + bound.h / 2
   const flamePoints = candles.length ? candles : [{ id: 'flame', x: centerX, y: centerY, size: 28 }]

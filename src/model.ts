@@ -7,7 +7,7 @@ export type Activity = keyof typeof activities
 export type Seat = 1 | 2
 export const otherSeat = (seat: Seat): Seat => seat === 1 ? 2 : 1
 export const themes = ['กระทงสีเดียว', 'กระทงมินิมอล', 'กระทงธรรมชาติ', 'กระทงดอกไม้จัดเต็ม', 'กระทงสุดแปลก']
-export const categories = ['ฐานกระทง', 'ใบตอง', 'ดอกไม้', 'ธูปและเทียน'] as const
+export const categories = ['ฐานกระทง', 'ใบตองและใบไม้', 'ดอกไม้', 'ธูปและเทียน', 'งานวัด', 'โลกใต้น้ำ', 'แฟนตาซี', 'สวนจิ๋ว'] as const
 export const materials = [
   { id: 'trunk', name: 'ฐานต้นกล้วย', category: 0, size: 250 },
   { id: 'banana', name: 'ฐานใบตอง', category: 0, size: 250 },
@@ -26,6 +26,42 @@ export const materials = [
   { id: 'incense', name: 'ธูป', category: 3, size: 53 },
   { id: 'candle', name: 'เทียน', category: 3, size: 44 },
   { id: 'beads', name: 'เปลือกหอย', category: 3, size: 36 },
+  { id: 'woven-base', name: 'ฐานจักสาน', category: 0, size: 250 },
+  { id: 'lilypad-base', name: 'ใบบัวลอยน้ำ', category: 0, size: 255 },
+  { id: 'moon-base', name: 'จันทร์เสี้ยว', category: 0, size: 255 },
+  { id: 'reef-base', name: 'เกาะปะการัง', category: 0, size: 255 },
+  { id: 'galaxy-base', name: 'เกาะดวงดาว', category: 0, size: 260 },
+  { id: 'fern', name: 'ใบเฟิร์น', category: 1, size: 87 },
+  { id: 'monstera', name: 'ใบฉลุ', category: 1, size: 80 },
+  { id: 'ginkgo', name: 'ใบแปะก๊วย', category: 1, size: 68 },
+  { id: 'bamboo', name: 'กิ่งไผ่', category: 1, size: 81 },
+  { id: 'frost-sprig', name: 'กิ่งเกล็ดน้ำแข็ง', category: 1, size: 82 },
+  { id: 'sunflower', name: 'ทานตะวัน', category: 2, size: 64 },
+  { id: 'butterfly-pea', name: 'อัญชัน', category: 2, size: 53 },
+  { id: 'hibiscus', name: 'ชบาแดง', category: 2, size: 60 },
+  { id: 'sakura', name: 'ซากุระ', category: 2, size: 50 },
+  { id: 'chrysanthemum', name: 'เบญจมาศ', category: 2, size: 58 },
+  { id: 'lavender', name: 'ช่อลาเวนเดอร์', category: 2, size: 75 },
+  { id: 'lotus-candle', name: 'เทียนดอกบัว', category: 3, size: 57 },
+  { id: 'star-candle', name: 'เทียนรูปดาว', category: 3, size: 53 },
+  { id: 'lantern', name: 'โคมกระดาษ', category: 4, size: 62 },
+  { id: 'bunting', name: 'ธงราวงานวัด', category: 4, size: 78 },
+  { id: 'garland', name: 'พวงมาลัย', category: 4, size: 70 },
+  { id: 'firework', name: 'พลุประกายทอง', category: 4, size: 67 },
+  { id: 'koi', name: 'ปลาคาร์ป', category: 5, size: 73 },
+  { id: 'turtle', name: 'เต่าตัวน้อย', category: 5, size: 62 },
+  { id: 'sea-shell', name: 'หอยเชลล์', category: 5, size: 53 },
+  { id: 'coral', name: 'กิ่งปะการัง', category: 5, size: 78 },
+  { id: 'pearl', name: 'หอยมุก', category: 5, size: 57 },
+  { id: 'crystal', name: 'ผลึกอเมทิสต์', category: 6, size: 68 },
+  { id: 'star', name: 'ดาวตกผลึก', category: 6, size: 56 },
+  { id: 'comet', name: 'ดาวหาง', category: 6, size: 70 },
+  { id: 'potion', name: 'ขวดยาเวทมนตร์', category: 6, size: 64 },
+  { id: 'dragon-egg', name: 'ไข่มังกร', category: 6, size: 70 },
+  { id: 'mushroom', name: 'เห็ดแดงจิ๋ว', category: 7, size: 56 },
+  { id: 'butterfly', name: 'ผีเสื้อปีกฟ้า', category: 7, size: 60 },
+  { id: 'bridge', name: 'สะพานไม้จิ๋ว', category: 7, size: 80 },
+  { id: 'cloud', name: 'ก้อนเมฆจิ๋ว', category: 7, size: 62 },
 ] as const
 export type Material = typeof materials[number]['id']
 export const materialById = new Map(materials.map(material => [material.id, material]))

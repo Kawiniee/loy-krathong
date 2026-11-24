@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
 import { randomUUID } from 'node:crypto'
+import { readFile } from 'node:fs/promises'
+import { URL } from 'node:url'
 import test from 'node:test'
 import { testDatabase } from './database.mjs'
 
@@ -28,6 +30,16 @@ test('private rooms, per-object edits, hidden designs, timed round and ceremony'
   const flower = { id: randomUUID(), material: 'lotus-pink', x: 180, y: 260, z: 1, size: 66, rotation: 38 }
   const edit = (uid, board, piece, expected = 0, roundId) =>
     act(uid, id, { type: 'edit', board, changes: [{ id: piece.id, expected, piece }], roundId })
+
+  await t.test('the expanded catalog accepts every material shown in the workshop', async () => {
+    const model = await readFile(new URL('../src/model.ts', import.meta.url), 'utf8')
+    const materials = [...model.matchAll(/^ {2}\{ id: '([^']+)', name:/gm)].map(match => match[1])
+    assert.ok(materials.length > 50)
+    const set = materials.map(material => ({ ...flower, id: randomUUID(), material }))
+    const changes = set.map(piece => ({ id: piece.id, expected: 0, piece }))
+    assert.equal((await act(first, id, { type: 'edit', board: 'own1', changes })).boards.own1.length, materials.length)
+    await assert.rejects(edit(first, 'own1', { ...flower, material: 'unknown-material' }), /invalid_piece/)
+  })
 
   await t.test('edits merge across different objects and reject stale writes', async () => {
     const next = await edit(first, 'shared', base)

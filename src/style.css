@@ -132,7 +132,7 @@ input[type="checkbox"], input[type="range"] { accent-color: var(--accent); }
 .material-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 12px 0; }
 .material-tabs button { border: 1px solid #ffffff16; border-radius: 7px; min-height: 38px; padding: 3px; font-size: .85rem; }
 .material-tabs button.active, .material-tabs button:hover { background: #483847; color: #f7d2a5; border-color: #c58f6a85; }
-.material-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.material-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; max-height: 370px; overflow-y: auto; scrollbar-width: thin; }
 .material-grid button { min-width: 0; display: grid; place-items: center; gap: 3px; border: 1px solid #ffffff19; border-radius: 9px; padding: 5px 2px; background: #242a3b; font-size: .81rem; color: #eee0d6; }
 .material-grid button:hover:not(:disabled) { background: #363448; border-color: #e7bf975d; }
 .material-grid button img { width: min(100%, 55px); height: 53px; object-fit: contain; filter: drop-shadow(0 2px 2px #131827); }
@@ -224,11 +224,11 @@ input[type="checkbox"], input[type="range"] { accent-color: var(--accent); }
   .studio { display: flex; flex-direction: column; gap: 8px; }
   .studio .panel { width: 100%; padding: 8px; }
   .materials, .tabletop { align-self: stretch; }
-  .material-tabs { display: flex; flex-wrap: wrap; margin: 5px 0; }
-  .material-tabs button { flex: 1; white-space: nowrap; min-height: 34px; }
-  .material-grid { display: flex; flex-wrap: wrap; gap: 4px; }
-  .material-grid button { flex: 1 1 72px; font-size: .76rem; padding: 2px; }
-  .material-grid button img { height: 34px; }
+  .material-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 6px 0; }
+  .material-tabs button { min-height: 38px; font-size: .78rem; }
+  .material-grid { grid-template-columns: unset; grid-auto-flow: column; grid-auto-columns: max(76px, 22%); max-height: none; overflow: auto hidden; padding-bottom: 3px; }
+  .material-grid button { font-size: .76rem; min-height: 66px; padding: 3px; }
+  .material-grid button img { height: 36px; }
   .material-hint { display: none; }
   .river-controls, .photo-controls, .challenge-head { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 9px; gap: 9px; }
   .river-ready, .challenge-head > div:first-child { grid-column: 1 / -1; }
